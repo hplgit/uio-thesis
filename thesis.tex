@@ -1,0 +1,234 @@
+%% PhD thesis for Dept of Informatics, Univ. of Oslo
+
+%% Use B5 paper (176mm × 250mm)
+\documentclass[10pt, b5paper]{article}
+
+%% Fix table of contents
+\newcommand{\notocsection}[1]{\refstepcounter{section}\section*{\thesection \quad #1}}
+\newcommand{\notocsubsection}[1]{\refstepcounter{subsection}\subsection*{\thesubsection \quad #1}}
+\newcommand{\notocsubsubsection}[1]{\refstepcounter{subsubsection}\subsubsection*{\thesubsubsection \quad #1}}
+
+\pdfcompresslevel=9
+
+\usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amscd}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{stmaryrd}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{color}
+\usepackage{booktabs}
+%\usepackage{natbib}
+\usepackage[numbers,square,sort&compress]{natbib}
+\usepackage{bibunits}
+\usepackage{amsthm}
+\usepackage{algorithm}
+\usepackage{import}
+\usepackage[small,bf]{caption}
+\usepackage{codehighlight}
+\usepackage{fancyvrb}
+\usepackage{textcomp}
+\usepackage{wrapfig}
+\usepackage[toc,page]{appendix}
+%% Define grey color
+\definecolor{grey}{rgb}{0.5,0.5,0.5}
+
+%% Table of contents
+\setcounter{tocdepth}{2}
+
+%% Numbering within sections
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+%% Fix counters
+\newcommand\resetcounters{\par
+  \setcounter{section}{0}%
+  \setcounter{subsection}{0}%
+  \setcounter{equation}{0}%
+  \setcounter{table}{0}%
+  \setcounter{figure}{0}%
+  \gdef\thesection{\arabic{section}}}
+
+%% Misc
+\newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
+\newcommand{\nonum}{\setcounter{secnumdepth}{-1}}
+\newcommand{\num}{\setcounter{secnumdepth}{2}}
+% Home-made cleardoublepage
+\newcommand{\mycleardoublepage}{\newpage\null\thispagestyle{empty}\newpage}
+
+%% Command for marginpar
+\let\oldmarginpar\marginpar
+\renewcommand\marginpar[1]{\-\oldmarginpar[\raggedleft\footnotesize #1]%
+{\raggedright\footnotesize #1}}
+
+%% Command for paper title and authors
+\newcommand{\mypaper}[3]{%
+  \thispagestyle{empty}
+  \begin{flushright}
+    \LARGE\textbf{Paper #1}
+  \end{flushright}
+  \vspace{4cm}
+  \begin{center}
+    \LARGE\textbf{#2}
+  \end{center}
+  \normalsize
+  \newpage
+  \null
+  \thispagestyle{empty}
+  \cleardoublepage
+  \begin{verse}
+    \begin{center}
+      \LARGE
+      #2
+    \end{center}
+  \end{verse}
+  \vspace{0.5cm}
+  \begin{center}
+    \large
+    #3
+  \end{center}
+  \normalsize}
+
+% Newcommands...
+
+\pagestyle{plain}
+\pagenumbering{roman}
+\thispagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+\vspace*{1cm}
+
+\LARGE{\bf{Title of Thesis}}
+
+\vspace*{1cm}
+\vspace*{1cm}
+
+{\huge{Author's name}}
+
+\end{center}
+
+\vfill
+
+\begin{tabular}{lll}
+\lower
+1.0cm
+\hbox{\includegraphics[width=2.0cm]{fig/uio.pdf}}& &
+\begin{minipage}{8.0cm}
+\small
+Thesis submitted for the degree of Philosophiae Doctor\\
+Department of Informatics\\
+Faculty of Mathematics and Natural Sciences\\
+University of Oslo\\
+Date
+\end{minipage}
+\end{tabular}
+
+\mycleardoublepage
+
+{\noindent\textbf{{This thesis consists of an introduction and the following five papers:}}}
+
+\vspace{0.8cm}
+
+\noindent
+{\textbf{{Paper I:}}
+\emph{Title...}\\\\
+\small
+Published in Some Journal, 2015.  \\
+This paper is co-authored with ...
+\normalsize
+
+\vspace{0.8cm}
+
+\noindent
+{\textbf{{Paper II:}} \emph{Title...} \\\\
+\small
+Published in ...\\
+This paper is co-authored with ...
+\normalsize
+
+% more papers....
+
+\mycleardoublepage
+
+\begin{center}
+\large{\bf{Acknowledgments}}
+\end{center}
+
+I want to thank...
+
+\begin{flushright}
+Author's name, city, date
+\end{flushright}
+
+\mycleardoublepage
+% Intro sheet
+
+\thispagestyle{empty}
+
+\null
+\vspace{4.5cm}
+
+\begin{center}
+\LARGE
+\textbf{Introduction}
+\normalsize
+\end{center}
+\mycleardoublepage
+
+\tableofcontents
+\mycleardoublepage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+%% % Introduction
+\begin{bibunit}[abbrvnat]
+  \input{chapters/intro/intro.tex}
+  \putbib[bibliography]
+\end{bibunit}
+
+\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
+
+% Paper I
+\mycleardoublepage
+\resetcounters
+\setcounter{page}{-1}
+\setcounter{algorithm}{0}
+
+\mypaper{I}
+        {Title...}
+        {Authors...}
+
+\begin{bibunit}[abbrvnat]
+  \input{chapters/paper-I/paper.tex}
+  %\putbib[bibliography]
+  \putbib[chapters/paper-I/bibliography_CEDarticle]
+\end{bibunit}
+\cleardoublepage
+
+
+% Paper II
+\resetcounters
+\setcounter{page}{-1}
+\setcounter{algorithm}{0}
+
+\mypaper{II}
+        {Title...}
+        {Authors...}
+
+\begin{bibunit}[abbrvnat]
+ \input{chapters/paper-II/paper.tex}
+ \putbib[bibliography]
+\end{bibunit}
+\cleardoublepage
+
+
+\end{document}
